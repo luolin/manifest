@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest>
+
+  <remote name="origin"
+           fetch=".." />
+
+  <default revision="refs/heads/coron-4.0"
+           remote="origin"
+           sync-j="4" />
+
+  <project path="manifest" name="baidurom/manifest" />
+  <project path="build" name="baidurom/build" />
+  <project path="tools" name="baidurom/tools" />
+  <project path="baidu/overlay" name="baidurom/overlay" />
+  <project path="devices/lt26i" name="baidurom/devices-lt26i" />
+  <project path="devices/onex" name="baidurom/devices-onex" />
+</manifest>
