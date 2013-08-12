@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest>
+
+  <remote name="origin"
+           fetch=".." />
+
+  <default revision="refs/heads/coron-4.1"
+           remote="origin"
+           sync-j="4" />
+
+  <project path="manifest" name="baidurom/manifest" />
+  <project path="build" name="baidurom/build" revision="refs/heads/coron-4.0"/>
+  <project path="tools" name="baidurom/tools" revision="refs/heads/coron-4.0"/>
+  <project path="baidu/overlay" name="baidurom/overlay" />
+</manifest>
