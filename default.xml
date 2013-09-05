@@ -12,4 +12,5 @@
   <project path="build" name="baidurom/build" revision="refs/heads/coron-4.0"/>
   <project path="tools" name="baidurom/tools" revision="refs/heads/coron-4.0"/>
   <project path="baidu/overlay" name="baidurom/overlay" />
+  <project path="devices/u930" name="baidurom/devices-u930" />
 </manifest>
