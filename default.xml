@@ -12,6 +12,7 @@
   <project path="build" name="baidurom/build" />
   <project path="tools" name="baidurom/tools" />
   <project path="baidu/overlay" name="baidurom/overlay" />
+  <project path="reference" name="baidurom/reference" />
   <project path="devices/lt26i" name="baidurom/devices-lt26i" />
   <project path="devices/onex" name="baidurom/devices-onex" />
 </manifest>
