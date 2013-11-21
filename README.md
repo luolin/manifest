@@ -111,6 +111,10 @@ Coron是一个致力于开源ROM制作的项目，开源了制作百度云ROM的
 对于已有的机型，可以自动化进行版本升级．按照如下步骤:
 
     1) 更新可用的升级补丁，升级补丁以XML的形式存放在referece/upgrade/目录中。
-    2) 在机型的Makefile文件中配置两个参数: ROM_VERSION和UPGRADE_VERSION．分别表示当前的所移植机型的ROM 版本和需要升级到的ROM 版本．
-    3) make upgrade。自动将补丁的改动注入的厂商代码中
+
+    2) 在机型的Makefile文件中配置两个参数: 
+       ROM_VERSION 当前的所移植机型的ROM 版本; 
+       UPGRADE_VERSION 需要升级到的ROM 版本．如果没有指定则默认升级到可用的最新版
+
+    3) make upgrade。自动将补丁的改动注入的厂商代码中．
 
