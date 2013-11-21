@@ -13,13 +13,14 @@ Coron是一个致力于开源ROM制作的项目，开源了制作百度云ROM的
 开源项目的分支命名基于coron，对于单卡机型，后缀为Android 版本，已有单卡分支有coron-4.0, coron-4.1,coron-4.2；对于双卡机型，后缀为双卡平台与Andorid 版本的结合，已有的双卡分支有coron-mtk-4.0, coron-mtk-4.2。这些分支对应到可以制作的ROM 版本，
 譬如，厂商原来的系统是Android 4.2 的单卡版本，那么，就推荐使用coron-4.2 分支来移植百度云ROM。
 
-开源项目的Git 库主要涉及到5 个部分：
+开源项目的Git 库主要涉及到6 个部分：
 
     1) manifest.git：开源项目的Repo 管理清单文件，以及教程和文档。
     2) build.git：编译脚本，包括基于Makfile 编译环境的构建脚本。
     3) tools.git：工具，包括反编译/编译，解包/打包的脚本，以及其他一些实用工具。
     4) overlay.git：资源覆盖，包括Baidu 对原生Android 资源文件的修改。
-    5) 示例机型的Git 库：已有devices-u930.git, devices-lt26i.git, devices-onex.git 这些机型移植的修改案例。
+    5) reference.git : 参考代码，包括aosp, bosp的反编译代码，以及自动Patch 的补丁文件。
+    6) 示例机型的Git 库：已有devices-u930.git, devices-lt26i.git, devices-onex.git 这些机型移植的修改案例。
 
 
 已有的分支和Git库的关系如下所示。
@@ -49,7 +50,7 @@ Coron是一个致力于开源ROM制作的项目，开源了制作百度云ROM的
 通过repo init命令的-b参数，选择需要下载的分支，譬如coron-4.0。
 通过repo sync命令同步远程代码。
 
-    repo init –u https://github.com/baidurom/manifest.git -b coron-4.0
+    repo init –u https://github.com/baidurom/manifest.git -b coron-4.2
     repo sync
 
 如果下载时，出现以下错误，多试几次即可(一般不超过10次，防火墙导致，难以避免)
@@ -66,7 +67,7 @@ Coron是一个致力于开源ROM制作的项目，开源了制作百度云ROM的
 
 对于具备Smali开源项目管理权限的开发者，可以直接通过git push命令，提交代码改动；
 
-    git push –u origin coron-4.0
+    git push –u origin coron-4.2
 
 在修改后的Git库使用上述命令。origin是远程仓库的别名，是开发者自定义的，也可以为其他别名；coron-4.0是改动的Git库所在的分支。
 
@@ -79,13 +80,13 @@ Coron是一个致力于开源ROM制作的项目，开源了制作百度云ROM的
 
 5. 百度云ROM移植
 ===
-以Sony LT26i为例，下载完代码以后，在开源项目根目录，执行以下命令：
+以Galaxy Nexus为例，下载完代码以后，在开源项目根目录，执行以下命令：
 
     source build/envsetup.sh
-    mkdir -p devices/lt26i
-    cd devices/lt26i
+    mkdir -p devices/gn
+    cd devices/gn
 
-这些命令将会初始化环境变量后，创建了lt26i的机型目录，后续的移植基本都在机型目录完成。
+这些命令将会初始化环境变量后，创建了gn的机型目录，后续的移植基本都在机型目录完成。
 
 将手机ROOT以后，取到可用的boot.img和recovery.img，放到机型根目录，执行以下命令：
 
@@ -93,10 +94,23 @@ Coron是一个致力于开源ROM制作的项目，开源了制作百度云ROM的
     make bringup
     make
 
-这些命令将会创建一个新的机型工程，自动执行bringup，将百度云ROM的改动注入厂商的代码中，然后编译整个工程，生成一个卡刷包。
+这些命令将会创建一个新的机型工程，自动执行bringup，将百度云ROM涉及到起机的改动注入厂商的代码中，然后编译整个工程，生成一个卡刷包。
 
-如果顺利，那么不会产生编译错误，卡刷包也能刷入手机正常使用；但具体机型一般有特定的问题，等待开发者去解决，以下文档可以帮助开发者解决一些实际问题：
+如果顺利，那么不会产生编译错误，卡刷包也能刷入手机正常使用，这时，可以执行后续命令，将起机后的其他百度云ROM的改动自动注入到厂商的代码中。
+
+    make patchall
+    make
+
+具体机型一般有特定的问题，等待开发者去解决，以下文档可以帮助开发者解决一些实际问题：
 
 《Developer-Guide.pdf》，《Details-to-Smali-Development.pdf》
 
+
+6. 版本升级
+===
+对于已有的机型，可以自动化进行版本升级．按照如下步骤:
+
+    1) 更新可用的升级补丁，升级补丁以XML的形式存放在referece/upgrade/目录中。
+    2) 在机型的Makefile文件中配置两个参数: ROM_VERSION和UPGRADE_VERSION．分别表示当前的所移植机型的ROM 版本和需要升级到的ROM 版本．
+    3) make upgrade。自动将补丁的改动注入的厂商代码中
 
