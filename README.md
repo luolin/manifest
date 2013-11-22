@@ -10,7 +10,7 @@ Coron是一个致力于开源ROM制作的项目，开源了制作百度云ROM的
 
 2. 分支策略
 ===
-开源项目的分支命名基于coron，对于单卡机型，后缀为Android 版本，已有单卡分支有coron-4.0, coron-4.1,coron-4.2；对于双卡机型，后缀为双卡平台与Andorid版本的结合，已有的双卡分支有coron-mtk-4.0, coron-mtk-4.2。这些分支对应到可以制作的ROM版本，
+开源项目的分支命名基于coron，对于单卡机型，后缀为Android 版本，已有单卡分支有coron-4.0, coron-4.1, coron-4.2；对于双卡机型，后缀为双卡平台与Andorid版本的结合，已有的双卡分支有coron-mtk-4.0, coron-mtk-4.2。这些分支对应到可以制作的ROM版本，
 譬如，厂商原来的系统是Android 4.2的单卡版本，那么，就推荐使用coron-4.2分支来移植百度云ROM。
 
 开源项目的Git 库主要涉及到6 个部分：
@@ -47,7 +47,7 @@ Coron是一个致力于开源ROM制作的项目，开源了制作百度云ROM的
 3. 代码下载
 ====
 
-通过repo init命令的-b参数，选择需要下载的分支，譬如coron-4.0。
+通过repo init命令的-b参数，选择需要下载的分支，譬如coron-4.2。
 通过repo sync命令同步远程代码。
 
     repo init –u https://github.com/baidurom/manifest.git -b coron-4.2
