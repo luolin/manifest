@@ -10,8 +10,8 @@ Coron是一个致力于开源ROM制作的项目，开源了制作百度云ROM的
 
 2. 分支策略
 ===
-开源项目的分支命名基于coron，对于单卡机型，后缀为Android 版本，已有单卡分支有coron-4.0, coron-4.1,coron-4.2；对于双卡机型，后缀为双卡平台与Andorid 版本的结合，已有的双卡分支有coron-mtk-4.0, coron-mtk-4.2。这些分支对应到可以制作的ROM 版本，
-譬如，厂商原来的系统是Android 4.2 的单卡版本，那么，就推荐使用coron-4.2 分支来移植百度云ROM。
+开源项目的分支命名基于coron，对于单卡机型，后缀为Android 版本，已有单卡分支有coron-4.0, coron-4.1,coron-4.2；对于双卡机型，后缀为双卡平台与Andorid版本的结合，已有的双卡分支有coron-mtk-4.0, coron-mtk-4.2。这些分支对应到可以制作的ROM版本，
+譬如，厂商原来的系统是Android 4.2的单卡版本，那么，就推荐使用coron-4.2分支来移植百度云ROM。
 
 开源项目的Git 库主要涉及到6 个部分：
 
@@ -32,14 +32,14 @@ Coron是一个致力于开源ROM制作的项目，开源了制作百度云ROM的
                 +----------+   +---------+   +---------+   +---------+   +----------+
     coron-4.1   | manifest |   | overlay |   |  build  |   |  tools  |   | devices- |
                 +----------+   +---------+   +---------+   +---------+   +---u930---+
-                                                 ||            ||
+                                                                 
                 +----------+   +---------+   +---------+   +---------+   +----------+
     coron-4.2   | manifest |   | overlay |   |  build  |   |  tools  |   | devices- |
                 +----------+   +---------+   +---------+   +---------+   +----??----+
     
-每一个分支都包含一定数量的Git库，譬如coron-4.1分支就包含manifest, overlay, build,  tools, devices-u930这些Git库；
+每一个分支都包含一定数量的Git库，譬如coron-4.1分支就包含manifest, overlay, build, tools, devices-u930这些Git库；
 
-每一个Git库都可能处于不同的分支，譬如manifest, overlay这些Git库就处于coron-4.0,  coron-4.1,coron-4.2等分支；对一个分支上的修改，不影响其他分支的Git库。
+每一个Git库都可能处于不同的分支，譬如manifest, overlay这些Git库就处于coron-4.0, coron-4.1, coron-4.2等分支；对一个分支上的修改，不影响其他分支的Git库。
 
 不同的分支也可以复用同一个Git库。譬如build, tools这些Git库就被coron-4.1, coron-4.2等分支复用。对一个分支上的修改，会影响到其他分支的Git库。
 
@@ -65,11 +65,11 @@ Coron是一个致力于开源ROM制作的项目，开源了制作百度云ROM的
 
 <b>1) 直接更新Git库</b>
 
-对于具备Smali开源项目管理权限的开发者，可以直接通过git push命令，提交代码改动；
+对于具备开源项目管理权限的开发者，可以直接通过git push命令，提交代码改动；
 
     git push –u origin coron-4.2
 
-在修改后的Git库使用上述命令。origin是远程仓库的别名，是开发者自定义的，也可以为其他别名；coron-4.0是改动的Git库所在的分支。
+在修改后的Git库使用上述命令。origin是远程仓库的别名，是开发者自定义的，也可以为其他别名；coron-4.2是改动的Git库所在的分支。
 
 <b>2) 通过Code Review方式提交代码</b>
 
