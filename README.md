@@ -10,16 +10,17 @@ Coron是一个致力于开源ROM制作的项目，开源了制作百度云ROM的
 
 2. 分支策略
 ===
-开源项目的分支命名基于coron，对于单卡机型，后缀为Android 版本，已有单卡分支有coron-4.0, coron-4.1,coron-4.2；对于双卡机型，后缀为双卡平台与Andorid 版本的结合，已有的双卡分支有coron-mtk-4.0, coron-mtk-4.2。这些分支对应到可以制作的ROM 版本，
-譬如，厂商原来的系统是Android 4.2 的单卡版本，那么，就推荐使用coron-4.2 分支来移植百度云ROM。
+开源项目的分支命名基于coron，对于单卡机型，后缀为Android 版本，已有单卡分支有coron-4.0, coron-4.1, coron-4.2；对于双卡机型，后缀为双卡平台与Andorid版本的结合，已有的双卡分支有coron-mtk-4.0, coron-mtk-4.2。这些分支对应到可以制作的ROM版本，
+譬如，厂商原来的系统是Android 4.2的单卡版本，那么，就推荐使用coron-4.2分支来移植百度云ROM。
 
-开源项目的Git 库主要涉及到5 个部分：
+开源项目的Git 库主要涉及到6 个部分：
 
     1) manifest.git：开源项目的Repo 管理清单文件，以及教程和文档。
     2) build.git：编译脚本，包括基于Makfile 编译环境的构建脚本。
     3) tools.git：工具，包括反编译/编译，解包/打包的脚本，以及其他一些实用工具。
     4) overlay.git：资源覆盖，包括Baidu 对原生Android 资源文件的修改。
-    5) 示例机型的Git 库：已有devices-u930.git, devices-lt26i.git, devices-onex.git 这些机型移植的修改案例。
+    5) reference.git : 参考代码，包括aosp, bosp的反编译代码，以及自动Patch 的补丁文件。
+    6) 示例机型的Git 库：已有devices-u930.git, devices-lt26i.git, devices-onex.git 这些机型移植的修改案例。
 
 
 已有的分支和Git库的关系如下所示。
@@ -31,14 +32,14 @@ Coron是一个致力于开源ROM制作的项目，开源了制作百度云ROM的
                 +----------+   +---------+   +---------+   +---------+   +----------+
     coron-4.1   | manifest |   | overlay |   |  build  |   |  tools  |   | devices- |
                 +----------+   +---------+   +---------+   +---------+   +---u930---+
-                                                 ||            ||
+                                                                 
                 +----------+   +---------+   +---------+   +---------+   +----------+
     coron-4.2   | manifest |   | overlay |   |  build  |   |  tools  |   | devices- |
                 +----------+   +---------+   +---------+   +---------+   +----??----+
     
-每一个分支都包含一定数量的Git库，譬如coron-4.1分支就包含manifest, overlay, build,  tools, devices-u930这些Git库；
+每一个分支都包含一定数量的Git库，譬如coron-4.1分支就包含manifest, overlay, build, tools, devices-u930这些Git库；
 
-每一个Git库都可能处于不同的分支，譬如manifest, overlay这些Git库就处于coron-4.0,  coron-4.1,coron-4.2等分支；对一个分支上的修改，不影响其他分支的Git库。
+每一个Git库都可能处于不同的分支，譬如manifest, overlay这些Git库就处于coron-4.0, coron-4.1, coron-4.2等分支；对一个分支上的修改，不影响其他分支的Git库。
 
 不同的分支也可以复用同一个Git库。譬如build, tools这些Git库就被coron-4.1, coron-4.2等分支复用。对一个分支上的修改，会影响到其他分支的Git库。
 
@@ -64,7 +65,7 @@ Coron是一个致力于开源ROM制作的项目，开源了制作百度云ROM的
 
 <b>1) 直接更新Git库</b>
 
-对于具备Smali开源项目管理权限的开发者，可以直接通过git push命令，提交代码改动；
+对于具备开源项目管理权限的开发者，可以直接通过git push命令，提交代码改动；
 
     git push –u origin coron-4.0
 
@@ -93,10 +94,27 @@ Coron是一个致力于开源ROM制作的项目，开源了制作百度云ROM的
     make bringup
     make
 
-这些命令将会创建一个新的机型工程，自动执行bringup，将百度云ROM的改动注入厂商的代码中，然后编译整个工程，生成一个卡刷包。
+这些命令将会创建一个新的机型工程，自动执行bringup，将百度云ROM涉及到起机的改动注入厂商的代码中，然后编译整个工程，生成一个卡刷包。
 
-如果顺利，那么不会产生编译错误，卡刷包也能刷入手机正常使用；但具体机型一般有特定的问题，等待开发者去解决，以下文档可以帮助开发者解决一些实际问题：
+如果顺利，那么不会产生编译错误，卡刷包也能刷入手机正常使用，这时，可以执行后续命令，将起机后的其他百度云ROM的改动自动注入到厂商的代码中。
+
+    make patchall
+    make
+
+具体机型一般有特定的问题，等待开发者去解决，以下文档可以帮助开发者解决一些实际问题：
 
 《Developer-Guide.pdf》，《Details-to-Smali-Development.pdf》
 
+
+6. 版本升级
+===
+对于已有的机型，可以自动化进行版本升级．按照如下步骤:
+
+    1) 更新可用的升级补丁，升级补丁以XML的形式存放在referece/upgrade/目录中。
+
+    2) 在机型的Makefile文件中配置两个参数: 
+       ROM_VERSION 当前的所移植机型的ROM 版本; 
+       UPGRADE_VERSION 需要升级到的ROM 版本．如果没有指定则默认升级到可用的最新版
+
+    3) make upgrade。自动将补丁的改动注入的厂商代码中．
 
