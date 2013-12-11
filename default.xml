@@ -13,4 +13,5 @@
   <project path="tools" name="baidurom/tools" />
   <project path="baidu/overlay" name="baidurom/overlay" />
   <project path="reference" name="baidurom/reference" />
+  <project path="devices/p6_t00" name="baidurom/devices-p6_t00" />
 </manifest>
