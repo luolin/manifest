@@ -15,4 +15,5 @@
   <project path="reference" name="baidurom/reference" />
   <project path="devices/lt26i" name="baidurom/devices-lt26i" />
   <project path="devices/onex" name="baidurom/devices-onex" />
+  <project path="devices/t328t" name="baidurom/devices-t328t" />
 </manifest>
