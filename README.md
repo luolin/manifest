@@ -50,7 +50,7 @@ Coron是一个致力于开源ROM制作的项目，开源了制作百度云ROM的
 通过repo init命令的-b参数，选择需要下载的分支，譬如coron-4.1。
 通过repo sync命令同步远程代码。
 
-    repo init –u https://github.com/baidurom/manifest.git -b coron-4.1
+    repo init -u https://github.com/baidurom/manifest.git -b coron-4.1
     repo sync
 
 如果下载时，出现以下错误，多试几次即可(一般不超过10次，防火墙导致，难以避免)
